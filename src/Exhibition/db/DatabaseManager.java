@@ -15,7 +15,6 @@ public class DatabaseManager {
         try {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 
-            //  Use absolute path to avoid writing to a copied version
             String dbPath = "C:\\Users\\TADDY\\eclipse-workspace\\Exhibition/VUE_Exhibition.accdb";
             connection = DriverManager.getConnection("jdbc:ucanaccess://" + dbPath);
 
