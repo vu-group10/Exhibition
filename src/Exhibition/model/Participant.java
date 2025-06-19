@@ -28,7 +28,6 @@ public class Participant {
     public String getEmail() { return email; }
     public String getImagePath() { return imagePath; }
 
-    // Optional: toString() for debugging/logging
     @Override
     public String toString() {
         return String.format("[%s] %s (%s)", registrationId, name, faculty);
