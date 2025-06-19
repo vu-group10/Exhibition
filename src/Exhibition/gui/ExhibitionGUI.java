@@ -12,6 +12,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import Exhibition.model.Participant;
 import Exhibition.db.DatabaseManager;
+import Exhibition.util.InputValidator;
 
 public class ExhibitionGUI extends JFrame {
     private DatabaseManager dbManager;
@@ -126,33 +127,32 @@ public class ExhibitionGUI extends JFrame {
         }
     }
 
-    private void registerParticipant() {
-        String regId = regIdField.getText().trim();
-        String name = nameField.getText().trim();
-        String faculty = facultyField.getText().trim();
-        String project = projectField.getText().trim();
-        String contact = contactField.getText().trim();
-        String email = emailField.getText().trim();
+private void registerParticipant() {
+    String regId = regIdField.getText().trim();
+    String name = nameField.getText().trim();
+    String faculty = facultyField.getText().trim();
+    String project = projectField.getText().trim();
+    String contact = contactField.getText().trim();
+    String email = emailField.getText().trim();
 
-        if (regId.isEmpty() || name.isEmpty() || faculty.isEmpty() || project.isEmpty() ||
-            contact.isEmpty() || email.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Validation Error", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-
-        if (!email.matches("^[\\w.-]+@[\\w.-]+\\.\\w+$")) {
-            JOptionPane.showMessageDialog(this, "Invalid email format.", "Validation Error", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-
-        Participant p = new Participant(regId, name, faculty, project, contact, email, imagePath);
-        if (dbManager.addParticipant(p)) {
-            JOptionPane.showMessageDialog(this, "Participant registered successfully.");
-            clearForm();
-        } else {
-            JOptionPane.showMessageDialog(this, "Registration failed.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
+    if (InputValidator.hasEmptyFields(regId, name, faculty, project, contact, email)) {
+        JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+        return;
     }
+
+    if (!InputValidator.isValidEmail(email)) {
+        JOptionPane.showMessageDialog(this, "Invalid email format.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    Participant p = new Participant(regId, name, faculty, project, contact, email, imagePath);
+    if (dbManager.addParticipant(p)) {
+        JOptionPane.showMessageDialog(this, "Participant registered successfully.");
+        clearForm();
+    } else {
+        JOptionPane.showMessageDialog(this, "Registration failed.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
 
     private void searchParticipant() {
         String regId = regIdField.getText().trim();
