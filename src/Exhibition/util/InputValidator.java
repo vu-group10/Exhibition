@@ -1,26 +1,24 @@
 package Exhibition.util;
 
-import Exhibition.model.Participant;
-
 public class InputValidator {
-    public static boolean validateParticipant(Participant participant) {
-        if (participant.getRegistrationId() == null || participant.getRegistrationId().trim().isEmpty() ||
-            participant.getName() == null || participant.getName().trim().isEmpty() ||
-            participant.getFaculty() == null || participant.getFaculty().trim().isEmpty() ||
-            participant.getProjectTitle() == null || participant.getProjectTitle().trim().isEmpty() ||
-            participant.getContact() == null || participant.getContact().trim().isEmpty() ||
-            participant.getEmail() == null || participant.getEmail().trim().isEmpty()) {
+
+    //Validate if the provided email address is in a correct format.
+    public static boolean isValidEmail(String email) {
+        if (email == null || email.trim().isEmpty()) {
             return false;
         }
-        
-        if (!participant.getEmail().matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
-            return false;
+
+        String emailRegex = "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,6}$";
+        return email.matches(emailRegex);
+    }
+
+    // Checks if any of the provided fields are null or empty after trimming.
+    public static boolean hasEmptyFields(String... fields) {
+        for (String field : fields) {
+            if (field == null || field.trim().isEmpty()) {
+                return true;
+            }
         }
-        
-        if (!participant.getContact().matches("^[0-9+\\- ]+$")) {
-            return false;
-        }
-        
-        return true;
+        return false;
     }
 }
