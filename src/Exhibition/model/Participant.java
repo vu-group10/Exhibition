@@ -9,9 +9,7 @@ public class Participant {
     private String email;
     private String imagePath;
 
-    public Participant(String registrationId, String name, String faculty, 
-                      String projectTitle, String contact, String email, 
-                      String imagePath) {
+    public Participant(String registrationId, String name, String faculty, String projectTitle, String contact, String email, String imagePath) {
         this.registrationId = registrationId;
         this.name = name;
         this.faculty = faculty;
@@ -21,80 +19,18 @@ public class Participant {
         this.imagePath = imagePath;
     }
 
-    // Registration ID getter/setter
-    public String getRegistrationId() {
-        return registrationId;
-    }
+    // Getters
+    public String getRegistrationId() { return registrationId; }
+    public String getName() { return name; }
+    public String getFaculty() { return faculty; }
+    public String getProjectTitle() { return projectTitle; }
+    public String getContact() { return contact; }
+    public String getEmail() { return email; }
+    public String getImagePath() { return imagePath; }
 
-    public void setRegistrationId(String registrationId) {
-        this.registrationId = registrationId;
-    }
-
-    // Name getter/setter
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    // Faculty getter/setter
-    public String getFaculty() {
-        return faculty;
-    }
-
-    public void setFaculty(String faculty) {
-        this.faculty = faculty;
-    }
-
-    // Project Title getter/setter
-    public String getProjectTitle() {
-        return projectTitle;
-    }
-
-    public void setProjectTitle(String projectTitle) {
-        this.projectTitle = projectTitle;
-    }
-
-    // Contact getter/setter
-    public String getContact() {
-        return contact;
-    }
-
-    public void setContact(String contact) {
-        this.contact = contact;
-    }
-
-    // Email getter/setter
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    // Image Path getter/setter
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-    }
-
-    // Optional: toString() method for debugging
+    // Optional: toString() for debugging/logging
     @Override
     public String toString() {
-        return "Participant{" +
-                "registrationId='" + registrationId + '\'' +
-                ", name='" + name + '\'' +
-                ", faculty='" + faculty + '\'' +
-                ", projectTitle='" + projectTitle + '\'' +
-                ", contact='" + contact + '\'' +
-                ", email='" + email + '\'' +
-                ", imagePath='" + imagePath + '\'' +
-                '}';
+        return String.format("[%s] %s (%s)", registrationId, name, faculty);
     }
 }
